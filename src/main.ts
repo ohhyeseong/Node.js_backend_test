@@ -4,8 +4,13 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
 
-  // Swagger 설정
   const config = new DocumentBuilder()
     .setTitle('바로 인턴 과제를 위한 API(회원가입/로그인/Auth)')
     .setDescription('바로 인턴 과제를 위한 API 문서')
@@ -19,7 +24,7 @@ async function bootstrap() {
         description: 'Enter JWT token',
         in: 'header',
       },
-      'access-token', // This name here is important for matching up with @ApiBearerAuth() in your controller!
+      'JWT',
     )
     .build();
   
@@ -34,7 +39,6 @@ async function bootstrap() {
     },
   });
 
-  // 0.0.0.0 주소로 서버 시작
   await app.listen(3000, '0.0.0.0');
   console.log(`서버가 0.0.0.0:3000에서 실행되었습니다.`);
   console.log(`API 문서: http://0.0.0.0:3000/api-docs`);

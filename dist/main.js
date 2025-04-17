@@ -5,6 +5,11 @@ const swagger_1 = require("@nestjs/swagger");
 const app_module_1 = require("./app.module");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    app.enableCors({
+        origin: '*',
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        credentials: true,
+    });
     const config = new swagger_1.DocumentBuilder()
         .setTitle('바로 인턴 과제를 위한 API(회원가입/로그인/Auth)')
         .setDescription('바로 인턴 과제를 위한 API 문서')

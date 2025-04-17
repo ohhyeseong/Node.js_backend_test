@@ -15,7 +15,7 @@ import { ConfigModule } from '@nestjs/config';
       password: process.env.DB_PASSWORD || 'aaaa4321',
       database: process.env.DB_DATABASE || 'express-datebase',
       entities: [User],
-      synchronize: false, // 자동 동기화 비활성화
+      synchronize: false, 
     }),
     AuthModule,
   ],
